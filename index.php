@@ -1,7 +1,3 @@
-<?php
-	header('Content-type: application/rss+xml'); 
-	$here = "http://". $_SERVER['SERVER_NAME'] ."/". $_SERVER['REQUEST_URI'];
-?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
 <title>soundcloud RSS</title>
@@ -19,6 +15,8 @@
 		$rss .= '<title>'. $t->title .'</title>';
 		$rss .= '<link>'. $t->download_url.'</link>';
 		$rss .= '<guid>'. $t->download_url.'</guid>';
+		$rss .= '<enclosure url="'. $t->stream_url .'" type="audio/mp3" length="1"/>';
+
 		$rss .= '</item>';
 	}
 	echo $rss;
