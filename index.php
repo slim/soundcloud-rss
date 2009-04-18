@@ -1,5 +1,13 @@
-<?php header('Content-type: application/rss+xml'); ?>
-<rss version="2.0"><channel><title>soundcloud RSS</title><link>http://markkit.net/soundcloud-rss/</link><description>RSS feed for soundcloud</description>
+<?php
+	header('Content-type: application/rss+xml'); 
+	$here = "http://". $_SERVER['SERVER_NAME'] ."/". $_SERVER['REQUEST_URI'];
+?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>soundcloud RSS</title>
+<atom:link href="<?php echo $here ?>" rel="self" type="application/rss+xml" />
+<link>http://markkit.net/soundcloud-rss/</link>
+<description>RSS feed for soundcloud</description>
 <?php
 	$user = $_GET['u'];
 
@@ -10,6 +18,7 @@
 		$rss .= '<item>';
 		$rss .= '<title>'. $t->title .'</title>';
 		$rss .= '<link>'. $t->download_url.'</link>';
+		$rss .= '<guid>'. $t->download_url.'</guid>';
 		$rss .= '</item>';
 	}
 	echo $rss;
