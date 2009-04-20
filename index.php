@@ -1,11 +1,15 @@
+<?php
+    header('Content-type: application/rss+xml');
+    $here = "http://". $_SERVER['SERVER_NAME'] ."/". $_SERVER['REQUEST_URI'];
+	$user = $_GET['u'];
+?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-<title>soundcloud RSS</title>
+<title><?php echo $user ?> RSS feed - Soundcloud</title>
 <atom:link href="<?php echo $here ?>" rel="self" type="application/rss+xml" />
 <link>http://markkit.net/soundcloud-rss/</link>
 <description>RSS feed for soundcloud</description>
 <?php
-	$user = $_GET['u'];
 
 	$tracks = json_decode(file_get_contents("http://api.soundcloud.com/users/$user/tracks.json"));
 
